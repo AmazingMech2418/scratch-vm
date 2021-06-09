@@ -1993,6 +1993,10 @@ class Runtime extends EventEmitter {
                 this._stopThread(this.threads[i]);
             }
         }
+        
+        this.hatQueue = this.hatQueue.filter(item => {
+            return item.optTarget != target
+        });
     }
 
     /**
@@ -2035,6 +2039,9 @@ class Runtime extends EventEmitter {
         }
         // Remove all remaining threads from executing in the next tick.
         this.threads = [];
+        
+        // Clear hat queue
+        this.hatQueue = [];
     }
 
     /**
